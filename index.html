@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f7faff" />
+  <title>Experiences OS</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Lived Inputs Dashboard</p>
+        <h1>Experiences OS</h1>
+      </div>
+      <button id="themeBtn" class="icon-btn" aria-label="Toggle theme">◐</button>
+    </header>
+
+    <main>
+      <section id="dashboard" class="view active">
+        <p class="eyebrow">Today · <span id="todayDate"></span></p>
+        <section class="hero-card">
+          <h2 id="greeting">Good morning, Rob.</h2>
+          <p class="muted">Here’s what your life is containing.</p>
+          <div class="summary-list" id="domainCards"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-head"><h3>7-Day Experience</h3><span id="trendLabel" class="mini-badge">Building signal</span></div>
+          <div id="weekBars" class="trend"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-head"><h3>Today’s experiences</h3><span id="entryCount" class="muted small">0 entries</span></div>
+          <div id="todayEntries" class="entry-list"></div>
+        </section>
+      </section>
+
+      <section id="capture" class="view">
+        <div class="domain-title"><span style="color:var(--blue)">Capture</span><h2>What happened?</h2></div>
+        <div class="date-pill"><button type="button">‹</button><span>Today</span><button type="button">›</button></div>
+        <form class="quick-form" data-domain="capture">
+          <textarea placeholder="Example: Baptism, brunch with family, dinner at a restaurant, helped someone move..." required></textarea>
+          <div class="type-grid">
+            <button class="type-option active" data-type="community" type="button">⌂<span>Community</span></button>
+            <button class="type-option" data-type="social" type="button">◌<span>Social</span></button>
+            <button class="type-option" data-type="service" type="button">✚<span>Service</span></button>
+            <button class="type-option" data-type="culture" type="button">◈<span>Culture</span></button>
+            <button class="type-option" data-type="exploration" type="button">↗<span>Explore</span></button>
+            <button class="type-option" data-type="achievement" type="button">✓<span>Achieve</span></button>
+          </div>
+          <p class="muted small">Tap one or more categories. One experience can count in multiple places.</p>
+          <button class="primary-btn" type="submit">Save Experience</button>
+        </form>
+      </section>
+
+      <section id="community" class="view domain-view" data-domain="community">
+        <div class="domain-title"><span>Belonging</span><h2>Community</h2></div>
+        <div class="date-pill"><button type="button">‹</button><span>Today</span><button type="button">›</button></div>
+        <section class="card metric-card community-accent"><div><div class="metric-label">Today</div><div class="metric-value" id="communityMetric">0 entries</div><p class="muted small" id="communitySub">Not logged</p></div><div class="ring"><span id="communityScore">0</span><small>/100</small></div></section>
+        <form class="quick-form" data-domain="community"><textarea placeholder="What community or belonging experience happened?" required></textarea><button class="primary-btn" type="submit">Save Community</button></form>
+        <h3>Quick Add</h3><div class="chips" data-target="community"></div><h3>Community Log</h3><div class="domain-entries"></div>
+      </section>
+
+      <section id="social" class="view domain-view" data-domain="social">
+        <div class="domain-title"><span>Connection</span><h2>Social</h2></div>
+        <div class="date-pill"><button type="button">‹</button><span>Today</span><button type="button">›</button></div>
+        <section class="card metric-card social-accent"><div><div class="metric-label">Today</div><div class="metric-value" id="socialMetric">0 entries</div><p class="muted small" id="socialSub">Not logged</p></div><div class="ring"><span id="socialScore">0</span><small>/100</small></div></section>
+        <form class="quick-form" data-domain="social"><textarea placeholder="Who did you spend meaningful time with?" required></textarea><button class="primary-btn" type="submit">Save Social</button></form>
+        <h3>Quick Add</h3><div class="chips" data-target="social"></div><h3>Social Log</h3><div class="domain-entries"></div>
+      </section>
+
+      <section id="service" class="view domain-view" data-domain="service">
+        <div class="domain-title"><span>Helping</span><h2>Service</h2></div>
+        <div class="date-pill"><button type="button">‹</button><span>Today</span><button type="button">›</button></div>
+        <section class="card metric-card service-accent"><div><div class="metric-label">Today</div><div class="metric-value" id="serviceMetric">0 entries</div><p class="muted small" id="serviceSub">Not logged</p></div><div class="ring"><span id="serviceScore">0</span><small>/100</small></div></section>
+        <form class="quick-form" data-domain="service"><textarea placeholder="How did you help, support, or serve?" required></textarea><button class="primary-btn" type="submit">Save Service</button></form>
+        <h3>Quick Add</h3><div class="chips" data-target="service"></div><h3>Service Log</h3><div class="domain-entries"></div>
+      </section>
+
+      <section id="culture" class="view domain-view" data-domain="culture">
+        <div class="domain-title"><span>Ideas</span><h2>Culture</h2></div>
+        <div class="date-pill"><button type="button">‹</button><span>Today</span><button type="button">›</button></div>
+        <section class="card metric-card culture-accent"><div><div class="metric-label">Today</div><div class="metric-value" id="cultureMetric">0 entries</div><p class="muted small" id="cultureSub">Not logged</p></div><div class="ring"><span id="cultureScore">0</span><small>/100</small></div></section>
+        <form class="quick-form" data-domain="culture"><textarea placeholder="What exposed you to art, ideas, history, performance, or meaning?" required></textarea><button class="primary-btn" type="submit">Save Culture</button></form>
+        <h3>Quick Add</h3><div class="chips" data-target="culture"></div><h3>Culture Log</h3><div class="domain-entries"></div>
+      </section>
+
+      <section id="exploration" class="view domain-view" data-domain="exploration">
+        <div class="domain-title"><span>Novelty</span><h2>Exploration</h2></div>
+        <div class="date-pill"><button type="button">‹</button><span>Today</span><button type="button">›</button></div>
+        <section class="card metric-card exploration-accent"><div><div class="metric-label">Today</div><div class="metric-value" id="explorationMetric">0 entries</div><p class="muted small" id="explorationSub">Not logged</p></div><div class="ring"><span id="explorationScore">0</span><small>/100</small></div></section>
+        <form class="quick-form" data-domain="exploration"><textarea placeholder="What was new, novel, unfamiliar, or expansive?" required></textarea><button class="primary-btn" type="submit">Save Exploration</button></form>
+        <h3>Quick Add</h3><div class="chips" data-target="exploration"></div><h3>Exploration Log</h3><div class="domain-entries"></div>
+      </section>
+
+      <section id="achievement" class="view domain-view" data-domain="achievement">
+        <div class="domain-title"><span>Progress</span><h2>Achievement</h2></div>
+        <div class="date-pill"><button type="button">‹</button><span>Today</span><button type="button">›</button></div>
+        <section class="card metric-card achievement-accent"><div><div class="metric-label">Today</div><div class="metric-value" id="achievementMetric">0 entries</div><p class="muted small" id="achievementSub">Not logged</p></div><div class="ring"><span id="achievementScore">0</span><small>/100</small></div></section>
+        <form class="quick-form" data-domain="achievement"><textarea placeholder="What meaningful progress did you make?" required></textarea><button class="primary-btn" type="submit">Save Achievement</button></form>
+        <h3>Quick Add</h3><div class="chips" data-target="achievement"></div><h3>Achievement Log</h3><div class="domain-entries"></div>
+      </section>
+
+      <section id="settings" class="view">
+        <div class="domain-title"><span style="color:var(--blue)">Control</span><h2>More</h2></div>
+        <section class="panel"><h3>Data</h3><div class="settings-actions"><button id="exportBtn">Export JSON</button><label class="file-btn">Import JSON<input id="importFile" type="file" accept="application/json" hidden /></label><button id="clearBtn" class="danger">Clear All</button></div><p class="muted small">All entries are stored locally on this device.</p></section>
+        <section class="panel"><h3>Product frame</h3><p class="muted">Experiences OS tracks lived inputs: community, social, service, culture, exploration, and achievement.</p></section>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Primary navigation">
+      <button class="nav-btn active" data-view="dashboard">⌂<span>Home</span></button>
+      <button class="nav-btn" data-view="capture">＋<span>Capture</span></button>
+      <button class="nav-btn" data-view="community">⌂<span>Community</span></button>
+      <button class="nav-btn" data-view="social">◌<span>Social</span></button>
+      <button class="nav-btn" data-view="achievement">✓<span>Achieve</span></button>
+      <button class="nav-btn" data-view="settings">☰<span>More</span></button>
+    </nav>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
